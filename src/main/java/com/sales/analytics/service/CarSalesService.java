@@ -13,5 +13,7 @@ public interface CarSalesService {
 
     List<YearCount> getCarSalesByYear();
 
+    List<CarSales> findCarsByModelName(String model);
+
 
 }

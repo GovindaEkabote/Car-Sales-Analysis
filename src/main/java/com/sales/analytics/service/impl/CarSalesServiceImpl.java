@@ -188,4 +188,9 @@ public class CarSalesServiceImpl implements CarSalesService {
     public List<YearCount> getCarSalesByYear() {
         return carSalesRepository.getCarSalesByYear();
     }
+
+    @Override
+    public List<CarSales> findCarsByModelName(String model) {
+        return carSalesRepository.findCarsByModelName(model);
+    }
 }

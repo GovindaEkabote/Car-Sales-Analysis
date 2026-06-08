@@ -3,6 +3,7 @@ package com.sales.analytics.controller;
 import com.sales.analytics.commons.response.ApiResponse;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
+import com.sales.analytics.model.CarSales;
 import com.sales.analytics.service.CarSalesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -88,5 +89,10 @@ public class CarSalesController {
                 yearCounts,
                 HttpStatus.OK.value());
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/get-car/{model}")
+    public List<CarSales> getCarByModelName(@PathVariable String model) {
+        return carSalesService.findCarsByModelName(model);
     }
 }

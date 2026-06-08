@@ -1,6 +1,7 @@
 package com.sales.analytics.service.impl;
 
 import com.sales.analytics.dto.UploadSalesResponse;
+import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
 import com.sales.analytics.repository.CarSalesRepository;
 import com.sales.analytics.service.CarSalesService;
@@ -181,5 +182,10 @@ public class CarSalesServiceImpl implements CarSalesService {
                 totalRecords,
                 successCount,
                 failCount);
+    }
+
+    @Override
+    public List<YearCount> getCarSalesByYear() {
+        return carSalesRepository.getCarSalesByYear();
     }
 }

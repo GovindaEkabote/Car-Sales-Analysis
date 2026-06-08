@@ -1,7 +1,9 @@
 package com.sales.analytics.repository;
 
+import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,4 +12,13 @@ import java.util.List;
 public interface CarSalesRepository extends JpaRepository<CarSales , Long> {
 
     boolean existsByCarNumber(String carNumber);
+
+
+    @Query("""
+            SELECT new com.sales.analytics.dto.YearCount(c.year, COUNT(c)) 
+            FROM CarSales c 
+            GROUP BY c.year
+            ORDER BY c.year
+            """)
+    List<YearCount> getCarSalesByYear();
 }

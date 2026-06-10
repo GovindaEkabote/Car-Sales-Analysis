@@ -2,6 +2,7 @@ package com.sales.analytics.controller;
 
 import com.sales.analytics.commons.response.ApiResponse;
 import com.sales.analytics.dto.MonthlySales;
+import com.sales.analytics.dto.TopSellingCar;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
@@ -104,6 +105,17 @@ public class CarSalesController {
                 "Success",
                 monthlySales,
                 HttpStatus.OK.value());
+        return ResponseEntity.ok(response);
+    }
+    @GetMapping("/top-selling-cars")
+    public ResponseEntity<ApiResponse<List<TopSellingCar>>> getTopSellingCars(){
+        List<TopSellingCar> topSellingCars = carSalesService.getTopSellingCars();
+        ApiResponse<List<TopSellingCar>> response = new ApiResponse<>(
+                true,
+                "Success",
+                topSellingCars,
+                HttpStatus.OK.value());
+
         return ResponseEntity.ok(response);
     }
 }

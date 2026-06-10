@@ -1,6 +1,7 @@
 package com.sales.analytics.service;
 
 import com.sales.analytics.dto.MonthlySales;
+import com.sales.analytics.dto.TopSellingCar;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
@@ -19,5 +20,7 @@ public interface CarSalesService {
 //    List<MonthlySales> getMonthlySales();
 
     List<MonthlySales> getMonthlySales();
+
+    List<TopSellingCar> getTopSellingCars();
 
 }

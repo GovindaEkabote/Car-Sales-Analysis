@@ -40,4 +40,19 @@ public interface CarSalesRepository extends JpaRepository<CarSales , Long> {
         """,
             nativeQuery = true)
     List<MonthlySales> getMonthlySales();
+
+
+    @Query(
+            value = """
+                    SELECT 
+                        model,
+                        COUNT(*) AS totalSales
+                    FROM car_sales
+                    GROUP BY model
+                    ORDER BY totalSales DESC
+                    LIMIT 10
+                    """,
+            nativeQuery = true
+    )
+    List<Object[]> getTopSellingCars();
 }

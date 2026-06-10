@@ -1,6 +1,7 @@
 package com.sales.analytics.service.impl;
 
 import com.sales.analytics.dto.MonthlySales;
+import com.sales.analytics.dto.TopSellingCar;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
@@ -25,6 +26,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Setter
 @RequiredArgsConstructor
@@ -198,5 +200,16 @@ public class CarSalesServiceImpl implements CarSalesService {
     @Override
     public List<MonthlySales> getMonthlySales() {
         return carSalesRepository.getMonthlySales();
+    }
+
+    @Override
+    public List<TopSellingCar> getTopSellingCars() {
+        return carSalesRepository.getTopSellingCars()
+                .stream()
+                .map(row -> new TopSellingCar(
+                        (String) row[0],
+                        ((Number) row[1]).longValue()
+                ))
+                .toList();
     }
 }

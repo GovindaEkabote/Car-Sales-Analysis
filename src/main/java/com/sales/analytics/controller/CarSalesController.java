@@ -1,10 +1,7 @@
 package com.sales.analytics.controller;
 
 import com.sales.analytics.commons.response.ApiResponse;
-import com.sales.analytics.dto.MonthlySales;
-import com.sales.analytics.dto.TopSellingCar;
-import com.sales.analytics.dto.UploadSalesResponse;
-import com.sales.analytics.dto.YearCount;
+import com.sales.analytics.dto.*;
 import com.sales.analytics.model.CarSales;
 import com.sales.analytics.service.CarSalesService;
 import lombok.RequiredArgsConstructor;
@@ -116,6 +113,18 @@ public class CarSalesController {
                 topSellingCars,
                 HttpStatus.OK.value());
 
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/revenue-by-year")
+    public ResponseEntity<ApiResponse<List<RevenueByYear>>> getYearlyRevenue(){
+        List<RevenueByYear> revenueByYears = carSalesService.getRevenueByYear();
+        ApiResponse<List<RevenueByYear>> response = new ApiResponse<>(
+                true,
+                "Success",
+                revenueByYears,
+                HttpStatus.OK.value()
+        );
         return ResponseEntity.ok(response);
     }
 }

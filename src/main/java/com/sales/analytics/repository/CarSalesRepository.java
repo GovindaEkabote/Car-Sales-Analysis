@@ -1,5 +1,6 @@
 package com.sales.analytics.repository;
 
+import com.sales.analytics.dto.RevenueByYear;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.dto.MonthlySales;
 import com.sales.analytics.model.CarSales;
@@ -50,9 +51,19 @@ public interface CarSalesRepository extends JpaRepository<CarSales , Long> {
                     FROM car_sales
                     GROUP BY model
                     ORDER BY totalSales DESC
-                    LIMIT 10
                     """,
             nativeQuery = true
     )
     List<Object[]> getTopSellingCars();
+
+
+    @Query(value = """
+            SELECT new com.sales.analytics.dto.RevenueByYear(
+            year(c.dateOfPurchase),
+            SUM(c.price)
+           ) FROM CarSales c
+            GROUP BY year(c.dateOfPurchase)
+            ORDER BY year(c.dateOfPurchase)
+            """)
+    List<RevenueByYear> getRevenueByYear();
 }

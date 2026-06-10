@@ -1,9 +1,6 @@
 package com.sales.analytics.service.impl;
 
-import com.sales.analytics.dto.MonthlySales;
-import com.sales.analytics.dto.TopSellingCar;
-import com.sales.analytics.dto.UploadSalesResponse;
-import com.sales.analytics.dto.YearCount;
+import com.sales.analytics.dto.*;
 import com.sales.analytics.model.CarSales;
 import com.sales.analytics.repository.CarSalesRepository;
 import com.sales.analytics.service.CarSalesService;
@@ -211,5 +208,10 @@ public class CarSalesServiceImpl implements CarSalesService {
                         ((Number) row[1]).longValue()
                 ))
                 .toList();
+    }
+
+    @Override
+    public List<RevenueByYear> getRevenueByYear() {
+        return carSalesRepository.getRevenueByYear();
     }
 }

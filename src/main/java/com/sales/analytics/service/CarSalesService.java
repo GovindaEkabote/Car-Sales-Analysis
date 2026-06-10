@@ -1,9 +1,6 @@
 package com.sales.analytics.service;
 
-import com.sales.analytics.dto.MonthlySales;
-import com.sales.analytics.dto.TopSellingCar;
-import com.sales.analytics.dto.UploadSalesResponse;
-import com.sales.analytics.dto.YearCount;
+import com.sales.analytics.dto.*;
 import com.sales.analytics.model.CarSales;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +19,7 @@ public interface CarSalesService {
     List<MonthlySales> getMonthlySales();
 
     List<TopSellingCar> getTopSellingCars();
+
+    List<RevenueByYear> getRevenueByYear();
 
 }

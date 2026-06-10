@@ -1,6 +1,7 @@
 package com.sales.analytics.repository;
 
 import com.sales.analytics.dto.YearCount;
+import com.sales.analytics.dto.MonthlySales;
 import com.sales.analytics.model.CarSales;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -27,4 +28,16 @@ public interface CarSalesRepository extends JpaRepository<CarSales , Long> {
             SELECT c FROM CarSales c WHERE c.model = :model
             """)
     List<CarSales> findCarsByModelName(@Param("model") String model);
+
+    @Query(value = """
+         SELECT
+            DATE_FORMAT(date_of_purchase, '%Y-%m') AS month,
+            COUNT(*) AS totalSales,
+            SUM(price) AS totalRevenue
+        FROM car_sales
+        GROUP BY DATE_FORMAT(date_of_purchase, '%Y-%m')
+        ORDER BY month
+        """,
+            nativeQuery = true)
+    List<MonthlySales> getMonthlySales();
 }

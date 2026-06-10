@@ -1,6 +1,7 @@
 package com.sales.analytics.controller;
 
 import com.sales.analytics.commons.response.ApiResponse;
+import com.sales.analytics.dto.MonthlySales;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
@@ -94,5 +95,15 @@ public class CarSalesController {
     @GetMapping("/get-car/{model}")
     public List<CarSales> getCarByModelName(@PathVariable String model) {
         return carSalesService.findCarsByModelName(model);
+    }
+    @GetMapping("/monthly-sales")
+    public ResponseEntity<ApiResponse<List<MonthlySales>>> getMonthlySales(){
+        List<MonthlySales> monthlySales = carSalesService.getMonthlySales();
+        ApiResponse<List<MonthlySales>>  response = new ApiResponse<>(
+                true,
+                "Success",
+                monthlySales,
+                HttpStatus.OK.value());
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,5 +1,6 @@
 package com.sales.analytics.service.impl;
 
+import com.sales.analytics.dto.MonthlySales;
 import com.sales.analytics.dto.UploadSalesResponse;
 import com.sales.analytics.dto.YearCount;
 import com.sales.analytics.model.CarSales;
@@ -192,5 +193,10 @@ public class CarSalesServiceImpl implements CarSalesService {
     @Override
     public List<CarSales> findCarsByModelName(String model) {
         return carSalesRepository.findCarsByModelName(model);
+    }
+
+    @Override
+    public List<MonthlySales> getMonthlySales() {
+        return carSalesRepository.getMonthlySales();
     }
 }
